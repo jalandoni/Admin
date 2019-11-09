@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Grocery List</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+        integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <style>
+        body{
+            background-image: url('data:image/jpeg;base64,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');
+            background-repeat: no-repeat;
+            background-position: cover;
+            background-size: cover;
+
+        }
+        .close {
+            font-size: 16px;
+        }
+
+        .close p {
+            float: right !important;
+
+        }
+        #search{
+            width: 100px;
+        }
+
+        .btn {
+            margin-right: 2px;
+            width: 200px;
+            height: 45px;
+        }
+
+        .btn-xs {
+            height: 35px;
+            width: 100px;
+            font-size: 12px;
+        }
+
+        .other {
+            width: 30%;
+        }
+
+        .others {
+            width: 15%;
+        }
+
+        .action {
+            width: 40%-2px;
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+        .card{
+            background-color: rgba(255, 255, 255, .15);  
+            
+        }
+
+        text{
+            font-size: 50px;
+            color:blue;
+        }
+
+        .header{
+            background-color: rgb(110, 79, 41);
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <div class="card-body row no-gutters align-items-center">
+                <div class="col-auto">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </div>
+                <div class="col">
+                    <input class="form-control form-control-lg form-control-borderless" id="searhBook" type="search" placeholder="Search by Book ID">
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-raised btn-success search" id="search" type="submit">Search</button>
+                </div>
+
+            </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="row classList">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 ">
+            <br><br>
+            <div class=" card">
+                <br>
+                <center>
+                    <button type="button" class="btn btn-sucess btn btn-raised btn-primary" id="create" data-toggle="button"
+                        aria-pressed="false" autocomplete="off">
+                        Borrow Book
+                    </button>
+                    <br>
+                    <br>
+                    <div class="container">
+                        <table id="table" class="table table-bordered text-center">
+                            <div class="header">
+
+
+                                <thead>
+                                    <tr class="table-info">
+
+                                        <th class="other text-center">Borrower Name</th>
+                                        <th class="other text-center">Book ID</th>
+                                        <th class="others text-center">Title</th>
+                                        <th class="others text-center">Date Borrowed</th>
+                                        <th class="action text-center">Action</th>
+                                        <th class="action text-center">Remarks</th>
+                                    </tr>
+                                </thead>
+                            </div>
+
+                            <tbody id="body">
+                                <tr id="inform">
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+                </center>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <br><br>
+    <div class="form row">
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4 card">
+            <br>
+            <br>
+            <div class="close">
+                <p>x</p>
+            </div>
+            <form action="">
+                <div class="form-group">
+                    <label for="iname">Borrower</label>
+                    <input type="text" id="item" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Book ID</label>
+                    <input type="text" id="bookId" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Book</label>
+                    <input type="text" id="quantity" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="priority">Date Borrowed</label>
+                    <input type="text" id="priority" class="form-control" required>
+                </div>
+                <center>
+                    <br>
+                    <button type="submit" id="submit" class="btn btn-primary save  btn-raised btn-success" data-toggle="button"
+                        aria-pressed="false" autocomplete="off">
+                        Save Information
+                    </button>
+                </center>
+            </form>
+            <br>
+        </div>
+    </div>
+    <div class="form-update row">
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4 card">
+            <br>
+            <br>
+            <div class="close">
+                <p>x</p>
+            </div>
+            <form action="">
+                <div class="form-group">
+                    <label for="iname">Borrower Name</label>
+                    <input type="text" id="update-item" class="form-control" placeholder="Enter complete name" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">ID</label>
+                    <input type="text" id="update-bookId" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Title</label>
+                    <input type="text" id="update-quantity" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="priority">Date</label>
+                    <input type="text" id="update-priority" class="form-control" required>
+                </div>
+                <center>
+                    <br>
+                    <button type="submit" class="btn btn-primary save-update btn-outline-success" data-toggle="button"
+                        aria-pressed="false" autocomplete="off">
+                        Update
+                    </button>
+                </center>
+            </form>
+            <br>
+        </div>
+    </div>
+
+    <div class="form-search row">
+
+            <div class="col-md-4"></div>
+            <div class="col-md-4 card">
+                <br>
+                <br>
+                <div class="close">
+                    <p>x</p>
+                </div>
+                <form action="">
+                    <div class="form-group">
+                        <label for="iname">Borrower Name</label>
+                        <input type="text" id="search-item" class="form-control" placeholder="Enter complete name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">ID</label>
+                        <input type="text" id="search-bookId" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Title</label>
+                        <input type="text" id="search-quantity" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="priority">Date</label>
+                        <input type="text" id="search-priority" class="form-control" required>
+                    </div>
+                    <!-- <center>
+                        <br>
+                        <button type="submit" class="btn btn-primary save-update btn-outline-success" data-toggle="button"
+                            aria-pressed="false" autocomplete="off">
+                            Update
+                        </button>
+                    </center> -->
+                </form>
+                <br>
+            </div>
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            today = yyyy + '/' + mm + '/' + dd;
+            
+            var idUpdate;
+            hideForm();
+            $('body').bootstrapMaterialDesign();
+            $("#create").click(function () {
+                $('#priority').val(today)
+                showForm()
+
+            });
+            function showForm() {
+                $(".form").show();
+                $(".form-update").hide();
+                $(".classList").hide();
+            }
+            function hideForm() {
+                $(".form").hide();
+                $(".form-update").hide();
+                $(".form-search").hide();
+                $(".classList").show();
+            }
+            function showUpdateForm() {
+                $(".form").hide();
+                $(".form-update").show();
+                $(".classList").hide();
+            }
+
+            function showSearchForm() {
+                $(".form").hide();
+                $(".form-update").hide();
+                $(".classList").hide();
+                $(".form-search").show();
+
+            }
+            function addRow(element) {
+
+                console.log(element);
+                var info = ["item", "bookId", "quantity","priority"];
+                var row = $("<tr>", {
+                    id: element._id,
+                    item: element.item,
+                    bookId: element.bookId,
+                    quantity: element.quantity,
+                    priority: element.priority,
+
+                });
+                for (var i = 0; i < info.length; i++) {
+                    $(row).append($("<td>").text($(row).attr(info[i])));
+                }
+                $(row).append("<td> <button class='btn btn-success btn-xs update btn btn-raised btn-info'>Update</button> <button class='btn btn-success btn-xs delete btn btn-raised btn-danger'>Delete</button>");
+                $(row).append("<td><select><option>Borrow</option><option>Returned</option></select> ");
+                $("tbody").append($(row));
+
+            }
+
+            function retrieveItem(id) {
+                console.log(id);
+                $.ajax({
+                    type: "get",
+                    url: "/item/retrieve/" + id,
+                    success: function (response) {
+                        console.log(response)
+                        $('#update-item').val(response.item);
+                        $('#update-bookId').val(response.bookId);
+                        $('#update-quantity').val(response.quantity);
+                        $('#update-priority').val(response.priority);
+                    },
+                    error: function (error) {
+                        console.log("error")
+                    }
+                })
+
+            }
+            function retrieveAll() {
+                $.ajax({
+                    type: "get",
+                    url: "/item/retrieve/all",
+                    success: function (response) {
+                        $("tbody tr").remove();
+                        response.forEach(function (element) {
+                            addRow(element);
+                        })
+                    },
+                    error: function (error) {
+                        console.log("error")
+                    }
+                })
+            }
+
+            retrieveAll();
+
+            $('#submit').on("click", function (e) {
+                e.preventDefault();
+                var item = $("#item").val();
+                var bookId = $("#bookId").val();
+                var quantity = $("#quantity").val();
+                var priority = $("#priority").val();
+                if (item == "" || bookId == "" || quantity == "" || priority == "") {
+                    Swal.fire({
+                        type: "error",
+                        title: 'ERROR',
+                        text: 'Please fill in all the requirements.'
+                    })
+                }
+                else if (item != "" && bookId != "" && quantity != "" && priority != "") {
+
+                    $.ajax({
+                        type: "put",
+                        url: "http://localhost:3000/item/create",
+                        crossDomain: true,
+                        data: JSON.stringify({ item: item, bookId: bookId, quantity: quantity, priority: priority }),
+                        success: function (response) {
+                            if (response == "Item has already taken!") {
+                                Swal.fire({
+                                    type: "error",
+                                    title: 'ERROR',
+                                    text: response
+                                })
+                            } else {
+                                hideForm();
+                                Swal.fire({
+                                    type: "success",
+                                    title: 'SUCCESS',
+                                    text: 'Successfully created!'
+                                })
+                                response.forEach(function (element) {
+                                    addRow(element);
+                                })
+                                var item = $("#item").val('');
+                                var bookId = $("#bookId").val('');
+                                var quantity = $("#quantity").val('');
+                                var priority = $("#priority").val('');
+                            }
+                        },
+                        error: function (err) {
+                            console.log('error');
+                        }
+                    })
+                }
+
+
+
+            });
+
+            $(".close").click(function () {
+                hideForm();
+            })
+
+            $(document).on("click", ".update", function () {
+                showUpdateForm();
+                idUpdate = $(this).parent().parent().attr("id");
+                retrieveItem($(this).parent().parent().attr("id"));
+
+                $(".save-update").on("click", function () {
+                    var item = $("#update-item").val();
+                    var bookId = $("#update-bookId").val();
+                    var quantity = $("#update-quantity").val();
+                    var priority = $("#update-priority").val();
+                    if (item == "" || bookId == "" || quantity == "" || priority == "") {
+                        Swal.fire({
+                            type: "error",
+                            title: 'ERROR',
+                            text: 'Please fill in all the requirements.'
+                        })
+                    }
+                    else if (item != "" && bookId != "" && quantity != "" && priority != "") {
+
+                        console.log(idUpdate);
+                        $.ajax({
+                            type: "post",
+                            url: "http://localhost:3000/item/update",
+                            crossDomain: true,
+                            data: JSON.stringify({ id: idUpdate, item: item, bookId: bookId, quantity: quantity, priority: priority }),
+                            success: function (response) {
+                                if (response == "Item has already taken!") {
+                                    Swal.fire({
+                                        type: "error",
+                                        title: 'ERROR',
+                                        text: response
+                                    })
+                                } else {
+                                    hideForm();
+                                    Swal.fire({
+                                        type: "success",
+                                        title: 'SUCCESS',
+                                        text: 'Successfully updated!'
+                                    })
+                                    retrieveAll();
+                                }
+                            },
+                            error: function (err) {
+                                console.log('error');
+                            }
+                        })
+                    }
+                });
+            });
+
+
+
+            $(document).on("click", ".search", function () {
+                showSearchForm()
+                var bookSearch = $("#update-bookId").val();
+                idUpdate = $(this).parent().parent().attr("id");
+                retrieveItem($(this).parent().parent().attr("id"));
+                        console.log(idUpdate);
+                        $.ajax({
+                            type: "post",
+                            url: "http://localhost:3000/item/retrieve",
+                            crossDomain: true,
+                            data: JSON.stringify({ id: idUpdate, item: item, bookId: bookId, quantity: quantity, priority: priority }),
+                            success: function (response) {
+                                if (response == "Item has already taken!") {
+                                    Swal.fire({
+                                        type: "error",
+                                        title: 'ERROR',
+                                        text: response
+                                    })
+                                } else {
+                                    hideForm();
+                                    Swal.fire({
+                                        type: "success",
+                                        title: 'SUCCESS',
+                                        text: 'Successfully updated!'
+                                    })
+                                    retrieveAll();
+                                }
+                            },
+                            error: function (err) {
+                                console.log('error');
+                            }
+                        })
+                    });
+
+
+
+
+
+
+
+
+
+
+
+            $(document).on("click", ".delete", function () {
+                var deleteid = $(this).parent().parent().attr("id");
+                $(this).parents("tr").remove();
+                $.ajax({
+                    type: "delete",
+                    url: "http://localhost:3000/item/delete",
+                    data: JSON.stringify({ id: deleteid }),
+                    success: function (response) {
+                        console.log("delete");
+                    },
+                    error: function (er) {
+                        console.log("error");
+                    }
+                })
+            });
+        });
+    </script>
+</body>
+
+</html>
