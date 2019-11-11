@@ -2,8 +2,14 @@ const express = require('express')
 const app = express();
 const path = require("path");
 const items = require("./item");
+// const bodyParser = require('body-parser')
 
 var mongoose = require('mongoose');
+// parse application/x-www-form-urlencoded
+// app.use(bodyParser.urlencoded({ extended: true }))
+
+// // parse application/json
+// app.use(bodyParser.json())
 
 mongoose.connect('mongodb://localhost:27017/Bor', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -18,6 +24,8 @@ app.get("/", function (req, res) {
 	res.sendFile(path.join(__dirname + '/index.html'));
 })
 
+app.use(express.static('public'))
+
 app.get("/item/retrieve/all", function (req, res) {
 	console.log("retrieving all...")
 	const test2 = async function () {
@@ -25,6 +33,22 @@ app.get("/item/retrieve/all", function (req, res) {
 		res.send(elements)
 	}
 	test2();
+})
+
+app.post("/item/update", function (req, res) {
+	console.log("updating...");
+	req.on('data', function (req) {
+		store = JSON.parse(req);
+		console.log(store.id);
+		const test = async function () {
+			const test1 = await items.getItem(store.item);
+				const result = await items.updateItem(store.id, store.item, store.bookId, store.quantity, store.priority);
+				const updated = await items.findItem(store.id);
+				res.send(updated)
+		}
+		test();
+	})
+	req.on('end', function () { })
 })
 
 
@@ -35,19 +59,19 @@ app.put("/item/create", function (req, res) {
 		const test2 = async function () {
 			const test = await items.getItem(store.item);
 			console.log(test);
-			if (test == null) {
+			// if (test == null) {
 				const data = {
 					item: store.item,
-					bookId:store.bookId,
+					bookId: store.bookId,
 					quantity: store.quantity,
 					priority: store.priority
 				}
 				await items.addPerson(data);
 				const item = await items.getLastItem()
 				res.send(item)
-			} else {
-				res.send("Item has already taken!")
-			}
+			// } else {
+			// 	res.send("Item has already taken!")
+			// }
 		}
 		test2();
 	});
@@ -66,25 +90,35 @@ app.get("/item/retrieve/:id", function (req, res) {
 	test();
 })
 
-app.post("/item/update", function (req, res) {
-	console.log("updating...");
+
+// app.post("/item/search", function (req, res) {
+// 	console.log("searching...");
+// 	items.searchItem(req.body.bookSearch).then(book => {
+// 		res.status(200).send(book)
+// 	}).catch(err => {
+// 		res.status(404).send(err)
+
+// 	});
+// })
+
+
+app.post("/item/search", function (req, res) {
+	console.log("searching...");
 	req.on('data', function (req) {
-		store = JSON.parse(req);
-		console.log(store.id);
+		book = JSON.parse(req);
 		const test = async function () {
-			const test1 = await items.getItem(store.item);
-			if (test1 == null) {
-				const result = await items.updateItem(store.id, store.item, store.quantity, store.priority);
-				const updated = await items.findItem(store.id);
-				res.send(updated)
-			} else {
-				res.send("Item has already taken!")
-			}
-		}
-		test();
-	})
-	req.on('end', function () { })
-})
+		const test1 = await items.searchItem(book.bookSearch);
+		res.send(test1);
+		console.log(test1)
+	};
+	test();
+});
+req.on('end', function () { })
+});
+
+
+
+
 
 app.delete("/item/delete", function (req, res) {
 	console.log("deleting...");
